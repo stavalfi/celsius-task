@@ -7,11 +7,5 @@ export default defineConfig({
   plugins: [reactRefresh(), tsconfigPaths({ root: '../..' })],
   build: {
     outDir: 'ui-dist',
-    target: ['chrome90'],
-  },
-  define: {
-    global: {
-      Uint8Array,
-    },
   },
 })
