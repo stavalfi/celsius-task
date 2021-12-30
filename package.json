@@ -1,0 +1,67 @@
+{
+  "name": "celsius-task",
+  "private": true,
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "postinstall": "node -e \"!process.env.SKIP_POST_INSTALL && require('child_process').execSync('yarn husky install',{ stdio: 'inherit' })\"",
+    "lint:code": "eslint --cache --max-warnings 0 'packages/**/src/**/*.{ts,d.ts}'",
+    "lint:versions": "syncpack list-mismatches",
+    "test": "jest",
+    "clean": "yarn workspace development run clean",
+    "build": "yarn tsc -b tsconfig-build.json",
+    "build:watch": "yarn clean && yarn build --watch",
+    "start:ui": "yarn workspace ui run start:dev",
+    "start:backend": "yarn workspace backend run start:dev",
+    "dev-resources:up": "docker-compose -f dev.docker-compose.yml up -d --remove-orphans",
+    "dev-resources:down": "docker-compose -f dev.docker-compose.yml down --remove-orphans",
+    "dev-resources:reset": "yarn dev-resources:down && yarn dev-resources:pull && yarn dev-resources:up"
+  },
+  "repository": {
+    "url": "https://github.com/stavalfi/celsius-task"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@types/chance": "^1.0.8",
+    "@types/node": "16.7.1",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "chance": "^1.1.7",
+    "colors": "^1.4.0",
+    "esbuild-register": "^2.5.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-node": "^0.3.4",
+    "eslint-plugin-clean-regex": "^0.5.1",
+    "eslint-plugin-functional": "^3.2.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsonc": "^1.2.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-no-secrets": "^0.8.9",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-radar": "^0.2.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-unused-imports": "^1.1.5",
+    "husky": "^5.1.1",
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "lint-staged": "^9.5.0",
+    "prettier": "2.1.1",
+    "pretty-quick": "^3.1.0",
+    "syncpack": "^5.0.1",
+    "ts-jest": "^26.5.4",
+    "ts-node": "10.2.1",
+    "tsconfig-paths": "^3.10.1",
+    "typescript": "4.5.4",
+    "vite": "^2.4.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

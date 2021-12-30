@@ -1,0 +1,22 @@
+{
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.autoSave": "afterDelay",
+  "files.associations": {
+    ".prettierrc": "json"
+  },
+  "jestrunner.detectYarnPnpJestBin": true,
+  "jestrunner.enableYarnPnpSupport": true,
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "Lua.diagnostics.globals": ["KEYS", "ARGV", "redis", "cjson"]
+}

@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  redis:
+    image: 'quay.io/eraci/redis:6.2.3-alpine'
+    container_name: redis-dev
+    ports:
+      - '6379:6379'

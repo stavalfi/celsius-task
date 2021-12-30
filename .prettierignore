@@ -1,0 +1,9 @@
+dist
+.history
+ui-dist
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
+winston.log.*
+helm-chart
+backup

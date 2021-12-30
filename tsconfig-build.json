@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "files": [],
+  "references": [
+    {
+      "path": "packages/ui/tsconfig-build.json"
+    },
+    {
+      "path": "packages/backend/tsconfig-build.json"
+    }
+  ]
+}
