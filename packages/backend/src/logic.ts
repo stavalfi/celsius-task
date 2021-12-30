@@ -21,6 +21,7 @@ import { LongtUrl, ShortUrl } from './types'
  */
 export async function encode({ longUrl, redisClient }: { longUrl: string; redisClient: Redis }): Promise<ShortUrl> {
   let retry = config.encodeReties
+
   while (retry >= 0) {
     const hash = cryptoRandomString({ length: 10, type: 'url-safe' }).toLowerCase()
     const shortUrl = new URL(hash, config.baseShortUrl).href
@@ -56,7 +57,7 @@ export async function encode({ longUrl, redisClient }: { longUrl: string; redisC
     retry--
   }
 
-  throw new Error(`failed to generate short url for longUrl: ${longUrl}`)
+  throw new Error(`failed to generate short url for longUrl: ${longUrl} due to too many retries`)
 }
 
 export async function decode({

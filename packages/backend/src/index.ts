@@ -16,29 +16,46 @@ async function main() {
   app.use(express.json())
   app.use(cors())
 
-  app.post<string, {}, { shortUrl: string }, { longUrl: string }>('/encode', async (req, res) => {
-    const { longUrl } = req.body
-
-    const shortUrl = await encode({ longUrl, redisClient })
-
-    console.log('/encode', { providedLongUrl: longUrl, shortUrl })
-
-    res.send({ shortUrl })
+  app.use((err, req, res, next) => {
+    res.status(500).send(err.message)
   })
 
-  app.post<string, {}, { longUrl: string } | { error: string }, { shortUrl: string }>('/decode', async (req, res) => {
-    const { shortUrl } = req.body
+  app.post<string, {}, { shortUrl: string } | { error: string }, { longUrl: string }>(
+    '/encode',
+    async (req, res, next) => {
+      try {
+        const { longUrl } = req.body
+        const shortUrl = await encode({ longUrl, redisClient })
 
-    const longUrl = await decode({ shortUrl, redisClient })
+        console.log('/encode', { providedLongUrl: longUrl, shortUrl })
 
-    console.log('/decode', { providedShortUrl: shortUrl, longUrl })
+        res.send({ shortUrl })
+      } catch (e) {
+        next(e)
+      }
+    },
+  )
 
-    if (longUrl) {
-      res.send({ longUrl })
-    } else {
-      res.status(404).send({ error: `short-url: ${shortUrl} not found` })
-    }
-  })
+  app.post<string, {}, { longUrl: string } | { error: string }, { shortUrl: string }>(
+    '/decode',
+    async (req, res, next) => {
+      try {
+        const { shortUrl } = req.body
+
+        const longUrl = await decode({ shortUrl, redisClient })
+
+        console.log('/decode', { providedShortUrl: shortUrl, longUrl })
+
+        if (longUrl) {
+          res.send({ longUrl })
+        } else {
+          res.status(404).send({ error: `short-url: ${shortUrl} not found` })
+        }
+      } catch (e) {
+        next(e)
+      }
+    },
+  )
 
   const server = await new Promise<Server>(resolve => {
     const server = app.listen(config.servicePort, () => resolve(server))
