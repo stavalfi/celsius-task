@@ -4,6 +4,8 @@ Included:
 2. Backend (Stateless, Can scale) - packages/backend
 3. Frontend (React) - packages/ui
 
+![](https://i.ibb.co/PQShGHQ/Screen-Shot-2021-12-31-at-0-33-41.png)
+
 ---
 
 Run:
