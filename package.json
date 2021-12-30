@@ -14,8 +14,7 @@
     "start:ui": "yarn workspace ui run start:dev",
     "start:backend": "yarn workspace backend run start:dev",
     "dev-resources:up": "docker-compose -f dev.docker-compose.yml up -d --remove-orphans",
-    "dev-resources:down": "docker-compose -f dev.docker-compose.yml down --remove-orphans",
-    "dev-resources:reset": "yarn dev-resources:down && yarn dev-resources:pull && yarn dev-resources:up"
+    "dev-resources:down": "docker-compose -f dev.docker-compose.yml down --remove-orphans"
   },
   "repository": {
     "url": "https://github.com/stavalfi/celsius-task"
